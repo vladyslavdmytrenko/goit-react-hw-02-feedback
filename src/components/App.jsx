@@ -12,18 +12,11 @@ class App extends Component {
   };
 
   handleReaction = reaction => {
-    this.setState(state => ({ ...state, [reaction]: ++state[reaction] }));
+    this.setState(state => ({ [reaction]: state[reaction] + 1 }));
   };
 
-  countTotalFeedback = () => {
-    let result = 0;
-
-    for (const property in this.state) {
-      result += this.state[property];
-    }
-
-    return result;
-  };
+  countTotalFeedback = () =>
+    Object.values(this.state).reduce((acc, el) => acc + el, 0);
 
   countPositiveFeedbackPercentage = () => {
     const totalReaction = this.countTotalFeedback();
